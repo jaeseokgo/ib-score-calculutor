@@ -4,10 +4,10 @@
 -- Covers: M19-M25, N19-N25, TZ0/TZ1/TZ2
 -- ============================================================
 
--- Timezone check (TZ0, TZ1, TZ2)
+-- Timezone check (TZ0, TZ1, TZ2, TZ3 — TZ3은 2025년 등 일부 연도에만 사용)
 alter table grade_boundaries drop constraint if exists grade_boundaries_timezone_check;
 alter table grade_boundaries add constraint grade_boundaries_timezone_check
-  check (timezone in ('TZ0','TZ1','TZ2'));
+  check (timezone in ('TZ0','TZ1','TZ2','TZ3'));
 
 -- ============================================================
 -- MATH AA

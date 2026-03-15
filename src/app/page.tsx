@@ -30,6 +30,13 @@ export default function Home() {
     setCalculated(false)
   }, [subject, level])
 
+  // 2025가 아닌 연도로 바꿀 때 TZ3 선택 중이면 TZ2로 전환
+  useEffect(() => {
+    if (year !== 2025 && timezone === 'TZ3') {
+      setTimezone('TZ2')
+    }
+  }, [year])
+
   useEffect(() => {
     setLoading(true)
     fetchBoundaries(subject, level, session, timezone)
@@ -109,17 +116,17 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Timezone */}
+          {/* Timezone — 2025년에만 TZ3 표시 */}
           <div className="flex flex-col gap-1.5">
             <p className="text-xs" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>Timezone</p>
             <div className="flex rounded-lg p-0.5" style={{ background: 'var(--bg-3)', border: '1px solid var(--border)' }}>
-              {(['TZ1', 'TZ2'] as Timezone[]).map((tz) => (
-                <button key={tz} onClick={() => { setTimezone(tz); setCalculated(false) }}
+              {(year === 2025 ? ['TZ1', 'TZ2', 'TZ3'] : ['TZ1', 'TZ2']).map((tz) => (
+                <button key={tz} onClick={() => { setTimezone(tz as Timezone); setCalculated(false) }}
                   className="px-4 py-1.5 rounded-md text-xs font-semibold transition-all duration-200"
                   style={timezone === tz
                     ? { background: 'var(--accent)', color: 'var(--text-on-accent)', fontFamily: 'var(--font-display)' }
                     : { color: 'var(--text-2)', fontFamily: 'var(--font-display)' }}>
-                  {tz === 'TZ1' ? 'TZ1 (Americas)' : 'TZ2 (Asia/EU)'}
+                  {tz === 'TZ1' ? 'TZ1 (Americas)' : tz === 'TZ2' ? 'TZ2 (Asia/EU)' : 'TZ3 (Africa/ME)'}
                 </button>
               ))}
             </div>
