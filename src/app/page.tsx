@@ -30,20 +30,29 @@ export default function Home() {
     setCalculated(false)
   }, [subject, level])
 
-  // 2025가 아닌 연도로 바꿀 때 TZ3 선택 중이면 TZ2로 전환
+  // Session + year에 따라 유효한 timezone으로 자동 전환
   useEffect(() => {
-    if (year !== 2025 && timezone === 'TZ3') {
-      setTimezone('TZ2')
+    if (session === 'N' && year < 2025) {
+      setTimezone('TZ0')
+    } else if (session === 'N' && year === 2025) {
+      if (timezone !== 'TZ1' && timezone !== 'TZ3') setTimezone('TZ1')
+    } else if (session === 'M' && year === 2025) {
+      if (timezone === 'TZ0') setTimezone('TZ2')
+    } else {
+      // May + year < 2025
+      if (timezone === 'TZ3' || timezone === 'TZ0') setTimezone('TZ2')
     }
-  }, [year])
+  }, [session, year])
+
+  const effectiveTimezone: Timezone = session === 'N' && year < 2025 ? 'TZ0' : timezone
 
   useEffect(() => {
     setLoading(true)
-    fetchBoundaries(subject, level, session, timezone)
+    fetchBoundaries(subject, level, session, effectiveTimezone)
       .then(setBoundaries)
       .catch(console.error)
       .finally(() => setLoading(false))
-  }, [subject, level, session, timezone])
+  }, [subject, level, session, effectiveTimezone])
 
   const handleScoreChange = useCallback((paperId: string, value: number | null) => {
     setScores((prev) =>
@@ -116,21 +125,28 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Timezone — 2025년에만 TZ3 표시 */}
-          <div className="flex flex-col gap-1.5">
-            <p className="text-xs" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>Timezone</p>
-            <div className="flex rounded-lg p-0.5" style={{ background: 'var(--bg-3)', border: '1px solid var(--border)' }}>
-              {(year === 2025 ? ['TZ1', 'TZ2', 'TZ3'] : ['TZ1', 'TZ2']).map((tz) => (
-                <button key={tz} onClick={() => { setTimezone(tz as Timezone); setCalculated(false) }}
-                  className="px-4 py-1.5 rounded-md text-xs font-semibold transition-all duration-200"
-                  style={timezone === tz
-                    ? { background: 'var(--accent)', color: 'var(--text-on-accent)', fontFamily: 'var(--font-display)' }
-                    : { color: 'var(--text-2)', fontFamily: 'var(--font-display)' }}>
-                  {tz}
-                </button>
-              ))}
+          {/* Timezone — Nov + year < 2025: hide and use TZ0; else show session/year-specific buttons */}
+          {!(session === 'N' && year < 2025) && (
+            <div className="flex flex-col gap-1.5">
+              <p className="text-xs" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>Timezone</p>
+              <div className="flex rounded-lg p-0.5" style={{ background: 'var(--bg-3)', border: '1px solid var(--border)' }}>
+                {(session === 'N' && year === 2025
+                  ? ['TZ1', 'TZ3']
+                  : session === 'M' && year === 2025
+                    ? ['TZ1', 'TZ2', 'TZ3']
+                    : ['TZ1', 'TZ2']
+                ).map((tz) => (
+                  <button key={tz} onClick={() => { setTimezone(tz as Timezone); setCalculated(false) }}
+                    className="px-4 py-1.5 rounded-md text-xs font-semibold transition-all duration-200"
+                    style={timezone === tz
+                      ? { background: 'var(--accent)', color: 'var(--text-on-accent)', fontFamily: 'var(--font-display)' }
+                      : { color: 'var(--text-2)', fontFamily: 'var(--font-display)' }}>
+                    {tz}
+                  </button>
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
 
         {/* Main grid */}
@@ -206,7 +222,7 @@ export default function Home() {
 
             {!currentBoundary && !loading && (
               <p className="text-xs" style={{ color: 'var(--grade-3)' }}>
-                No boundary data for {session === 'M' ? 'May' : 'Nov'} {year} {timezone}. Try a different session or year.
+                No boundary data for {session === 'M' ? 'May' : 'Nov'} {year} {effectiveTimezone}. Try a different session or year.
               </p>
             )}
             {!allFilled && hasAnyScore && (
@@ -217,7 +233,7 @@ export default function Home() {
           {/* Right: Result */}
           <div className="flex flex-col gap-4">
             {result && calculated ? (
-              <ResultCard result={result} year={year} session={session} timezone={timezone} />
+              <ResultCard result={result} year={year} session={session} timezone={effectiveTimezone} />
             ) : (
               <div className="rounded-xl p-5 flex flex-col items-center justify-center text-center gap-3 h-full min-h-[200px]"
                 style={{ background: 'var(--bg-card)', border: '1px dashed var(--border)' }}>
@@ -245,7 +261,7 @@ export default function Home() {
             style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', animationDelay: '0.1s' }}>
             <div className="px-5 py-3" style={{ borderBottom: '1px solid var(--border)' }}>
               <h3 className="text-xs font-semibold" style={{ fontFamily: 'var(--font-display)', color: 'var(--text-2)' }}>
-                {subjectConfig.shortName} {level} · {session === 'M' ? 'May' : 'Nov'} {timezone} — Grade boundaries (%)
+                {subjectConfig.shortName} {level} · {session === 'M' ? 'May' : 'Nov'} {effectiveTimezone} — Grade boundaries (%)
               </h3>
             </div>
             <div className="overflow-x-auto">
