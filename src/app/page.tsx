@@ -126,7 +126,7 @@ export default function Home() {
                   style={timezone === tz
                     ? { background: 'var(--accent)', color: 'var(--text-on-accent)', fontFamily: 'var(--font-display)' }
                     : { color: 'var(--text-2)', fontFamily: 'var(--font-display)' }}>
-                  {tz === 'TZ1' ? 'TZ1 (Americas)' : tz === 'TZ2' ? 'TZ2 (Asia/EU)' : 'TZ3 (Africa/ME)'}
+                  {tz}
                 </button>
               ))}
             </div>
