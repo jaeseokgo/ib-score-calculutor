@@ -4,10 +4,10 @@
 -- Covers: M19-M25, N19-N25, TZ0/TZ1/TZ2
 -- ============================================================
 
--- Add TZ3 support
+-- Timezone check (TZ0, TZ1, TZ2)
 alter table grade_boundaries drop constraint if exists grade_boundaries_timezone_check;
 alter table grade_boundaries add constraint grade_boundaries_timezone_check
-  check (timezone in ('TZ0','TZ1','TZ2','TZ3'));
+  check (timezone in ('TZ0','TZ1','TZ2'));
 
 -- ============================================================
 -- MATH AA
@@ -16,9 +16,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('math_aa','SL',2025,'M','TZ1',65,52,38,25,15,7),
   ('math_aa','SL',2025,'M','TZ2',66,52,39,25,15,7),
-  ('math_aa','SL',2025,'M','TZ3',77,62,48,33,21,10),
   ('math_aa','SL',2025,'N','TZ1',80,67,54,41,27,13),
-  ('math_aa','SL',2025,'N','TZ3',80,67,53,40,27,13),
   ('math_aa','SL',2024,'N','TZ1',80,67,53,37,26,13),
   ('math_aa','SL',2024,'N','TZ2',80,67,53,37,26,13),
   ('math_aa','SL',2024,'M','TZ1',76,63,47,33,22,10),
@@ -35,9 +33,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('math_aa','HL',2025,'M','TZ1',73,60,48,34,24,12),
   ('math_aa','HL',2025,'M','TZ2',71,59,45,32,23,11),
-  ('math_aa','HL',2025,'M','TZ3',76,64,51,38,26,13),
   ('math_aa','HL',2025,'N','TZ1',78,64,49,34,26,13),
-  ('math_aa','HL',2025,'N','TZ3',75,63,49,35,24,12),
   ('math_aa','HL',2024,'N','TZ0',79,65,52,37,26,14),
   ('math_aa','HL',2024,'M','TZ1',76,62,49,35,23,10),
   ('math_aa','HL',2024,'M','TZ2',74,60,47,34,24,14),
@@ -62,9 +58,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('biology','SL',2025,'M','TZ1',77,64,52,39,26,13),
   ('biology','SL',2025,'M','TZ2',72,60,48,36,24,13),
-  ('biology','SL',2025,'M','TZ3',72,59,46,33,21,11),
   ('biology','SL',2025,'N','TZ1',78,66,52,40,25,14),
-  ('biology','SL',2025,'N','TZ3',77,64,52,39,24,14),
   ('biology','SL',2024,'N','TZ1',76,64,52,40,26,14),
   ('biology','SL',2024,'N','TZ2',81,68,55,43,29,16),
   ('biology','SL',2024,'M','TZ1',76,64,52,40,27,15),
@@ -81,9 +75,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('biology','HL',2025,'M','TZ1',76,62,49,36,25,13),
   ('biology','HL',2025,'M','TZ2',74,62,49,36,25,14),
-  ('biology','HL',2025,'M','TZ3',76,63,49,36,23,13),
   ('biology','HL',2025,'N','TZ1',78,65,51,38,24,14),
-  ('biology','HL',2025,'N','TZ3',77,63,48,34,21,13),
   ('biology','HL',2024,'N','TZ0',79,64,50,35,23,13),
   ('biology','HL',2024,'M','TZ1',76,62,50,36,25,14),
   ('biology','HL',2024,'M','TZ2',76,62,50,35,25,15),
@@ -108,9 +100,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('chemistry','SL',2025,'M','TZ1',71,60,49,38,28,16),
   ('chemistry','SL',2025,'M','TZ2',72,61,49,38,28,16),
-  ('chemistry','SL',2025,'M','TZ3',70,58,47,36,24,14),
   ('chemistry','SL',2025,'N','TZ1',76,66,55,44,28,15),
-  ('chemistry','SL',2025,'N','TZ3',75,65,54,43,28,15),
   ('chemistry','SL',2024,'N','TZ0',75,65,55,44,29,16),
   ('chemistry','SL',2024,'M','TZ1',73,61,50,38,26,15),
   ('chemistry','SL',2024,'M','TZ2',72,60,48,37,28,16),
@@ -126,9 +116,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('chemistry','HL',2025,'M','TZ1',74,63,51,40,26,15),
   ('chemistry','HL',2025,'M','TZ2',74,62,50,39,25,14),
-  ('chemistry','HL',2025,'M','TZ3',75,64,54,42,28,16),
   ('chemistry','HL',2025,'N','TZ1',76,63,51,38,26,16),
-  ('chemistry','HL',2025,'N','TZ3',77,64,51,37,24,14),
   ('chemistry','HL',2024,'N','TZ0',77,64,52,40,27,16),
   ('chemistry','HL',2024,'M','TZ1',76,64,52,40,27,16),
   ('chemistry','HL',2024,'M','TZ2',77,64,52,40,26,16),
@@ -152,9 +140,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('physics','SL',2025,'M','TZ1',63,53,42,32,20,12),
   ('physics','SL',2025,'M','TZ2',61,51,40,30,19,11),
-  ('physics','SL',2025,'M','TZ3',67,56,46,35,22,13),
   ('physics','SL',2025,'N','TZ1',69,58,45,34,23,13),
-  ('physics','SL',2025,'N','TZ3',70,58,45,33,23,13),
   ('physics','SL',2024,'N','TZ0',69,58,49,40,26,14),
   ('physics','SL',2024,'M','TZ1',73,61,49,38,24,14),
   ('physics','SL',2024,'M','TZ2',65,55,45,35,21,12),
@@ -170,9 +156,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('physics','HL',2025,'M','TZ1',67,56,45,35,24,13),
   ('physics','HL',2025,'M','TZ2',68,58,46,36,25,14),
-  ('physics','HL',2025,'M','TZ3',71,59,46,34,23,14),
   ('physics','HL',2025,'N','TZ1',70,57,46,34,22,14),
-  ('physics','HL',2025,'N','TZ3',71,59,46,34,23,14),
   ('physics','HL',2024,'N','TZ0',69,58,48,38,25,14),
   ('physics','HL',2024,'M','TZ1',73,61,50,38,24,15),
   ('physics','HL',2024,'M','TZ2',68,59,48,38,26,14),
@@ -197,9 +181,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('economics','SL',2025,'M','TZ1',75,64,54,43,30,15),
   ('economics','SL',2025,'M','TZ2',76,64,52,40,29,15),
-  ('economics','SL',2025,'M','TZ3',76,64,51,39,25,12),
   ('economics','SL',2025,'N','TZ1',79,67,54,42,29,15),
-  ('economics','SL',2025,'N','TZ3',81,69,54,43,31,16),
   ('economics','SL',2024,'N','TZ1',80,67,55,43,30,15),
   ('economics','SL',2024,'N','TZ2',80,68,55,44,32,16),
   ('economics','SL',2024,'M','TZ1',80,67,53,40,24,12),
@@ -215,9 +197,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('economics','HL',2025,'M','TZ1',77,65,54,42,29,14),
   ('economics','HL',2025,'M','TZ2',76,63,50,38,27,14),
-  ('economics','HL',2025,'M','TZ3',77,65,52,40,28,14),
   ('economics','HL',2025,'N','TZ1',77,65,51,38,26,13),
-  ('economics','HL',2025,'N','TZ3',79,65,52,38,26,13),
   ('economics','HL',2024,'N','TZ1',78,64,51,37,25,13),
   ('economics','HL',2024,'N','TZ2',78,64,51,37,26,13),
   ('economics','HL',2024,'M','TZ1',76,62,50,37,24,12),
@@ -242,9 +222,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('history','SL',2025,'M','TZ1',77,63,49,35,25,11),
   ('history','SL',2025,'M','TZ2',77,63,49,35,25,11),
-  ('history','SL',2025,'M','TZ3',77,63,50,37,27,13),
   ('history','SL',2025,'N','TZ1',76,63,51,38,28,14),
-  ('history','SL',2025,'N','TZ3',76,64,51,39,29,14),
   ('history','SL',2024,'N','TZ1',77,63,53,39,29,14),
   ('history','SL',2024,'N','TZ2',77,64,53,41,31,15),
   ('history','SL',2024,'M','TZ1',75,62,49,35,24,11),
@@ -261,8 +239,6 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('history','HL',2025,'M','TZ1',74,61,49,36,25,11),
   ('history','HL',2025,'M','TZ2',74,61,49,36,25,11),
-  ('history','HL',2025,'M','TZ3',74,61,49,37,26,12),
-  ('history','HL',2025,'N','TZ3',74,62,50,38,28,14),
   ('history','HL',2024,'N','TZ1',74,61,51,38,28,14),
   ('history','HL',2024,'N','TZ2',74,62,51,39,29,15),
   ('history','HL',2024,'M','TZ1',73,60,49,36,24,11),
@@ -288,9 +264,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('psychology','SL',2025,'M','TZ1',71,58,49,36,26,12),
   ('psychology','SL',2025,'M','TZ2',75,61,51,37,25,12),
-  ('psychology','SL',2025,'M','TZ3',73,60,49,36,24,12),
   ('psychology','SL',2025,'N','TZ1',71,58,48,35,19,10),
-  ('psychology','SL',2025,'N','TZ3',72,60,50,38,25,12),
   ('psychology','SL',2024,'N','TZ0',73,60,49,36,22,11),
   ('psychology','SL',2024,'M','TZ1',73,59,45,31,20,9),
   ('psychology','SL',2024,'M','TZ2',74,61,50,38,26,12),
@@ -305,9 +279,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('psychology','HL',2025,'M','TZ1',68,57,45,33,21,10),
   ('psychology','HL',2025,'M','TZ2',73,61,49,37,23,11),
-  ('psychology','HL',2025,'M','TZ3',74,61,48,34,21,10),
   ('psychology','HL',2025,'N','TZ1',72,60,48,36,23,10),
-  ('psychology','HL',2025,'N','TZ3',73,61,49,37,23,11),
   ('psychology','HL',2024,'N','TZ0',72,60,47,35,20,9),
   ('psychology','HL',2024,'M','TZ1',73,59,45,31,19,8),
   ('psychology','HL',2024,'M','TZ2',73,61,49,37,23,11),
@@ -331,7 +303,6 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('business_management','SL',2025,'M','TZ1',75,63,48,36,26,13),
   ('business_management','SL',2025,'M','TZ2',80,68,55,43,31,16),
-  ('business_management','SL',2025,'M','TZ3',74,62,50,38,27,14),
   ('business_management','SL',2024,'N','TZ1',77,65,54,42,29,15),
   ('business_management','SL',2024,'N','TZ2',80,69,57,45,32,16),
   ('business_management','SL',2024,'M','TZ1',72,61,48,37,25,13),
@@ -346,7 +317,6 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('business_management','HL',2025,'M','TZ1',73,61,48,36,24,12),
   ('business_management','HL',2025,'M','TZ2',75,63,52,41,28,14),
-  ('business_management','HL',2025,'M','TZ3',70,58,47,35,23,12),
   ('business_management','HL',2024,'N','TZ1',71,60,50,38,26,14),
   ('business_management','HL',2024,'N','TZ2',77,66,55,44,30,15),
   ('business_management','HL',2024,'M','TZ1',73,61,49,36,23,12),
@@ -370,9 +340,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('english_a_lang_lit','SL',2025,'M','TZ1',78,63,49,34,22,11),
   ('english_a_lang_lit','SL',2025,'M','TZ2',78,65,53,38,25,11),
-  ('english_a_lang_lit','SL',2025,'M','TZ3',78,63,51,36,23,11),
   ('english_a_lang_lit','SL',2025,'N','TZ1',82,70,55,43,30,14),
-  ('english_a_lang_lit','SL',2025,'N','TZ3',80,68,54,42,27,14),
   ('english_a_lang_lit','SL',2024,'N','TZ1',78,65,53,39,26,12),
   ('english_a_lang_lit','SL',2024,'N','TZ2',83,70,58,45,30,14),
   ('english_a_lang_lit','SL',2024,'M','TZ1',81,66,51,36,23,11),
@@ -389,9 +357,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('english_a_lang_lit','HL',2025,'M','TZ1',78,65,52,38,25,13),
   ('english_a_lang_lit','HL',2025,'M','TZ2',79,66,53,41,25,12),
-  ('english_a_lang_lit','HL',2025,'M','TZ3',78,65,53,40,26,13),
   ('english_a_lang_lit','HL',2025,'N','TZ1',81,68,55,43,29,15),
-  ('english_a_lang_lit','HL',2025,'N','TZ3',81,68,55,41,27,14),
   ('english_a_lang_lit','HL',2024,'N','TZ1',80,67,55,42,28,15),
   ('english_a_lang_lit','HL',2024,'N','TZ2',83,69,57,43,28,14),
   ('english_a_lang_lit','HL',2024,'M','TZ1',78,65,53,40,26,13),
@@ -417,9 +383,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- SL
   ('english_b','SL',2025,'M','TZ1',86,71,54,39,25,12),
   ('english_b','SL',2025,'M','TZ2',87,71,55,39,24,11),
-  ('english_b','SL',2025,'M','TZ3',88,71,54,37,22,11),
   ('english_b','SL',2025,'N','TZ1',89,75,60,46,28,14),
-  ('english_b','SL',2025,'N','TZ3',87,74,60,46,28,14),
   ('english_b','SL',2024,'N','TZ0',88,74,59,45,29,14),
   ('english_b','SL',2024,'M','TZ1',88,72,56,40,24,11),
   ('english_b','SL',2024,'M','TZ2',88,72,55,40,25,11),
@@ -433,9 +397,7 @@ insert into grade_boundaries (subject, level, year, session, timezone, grade7, g
 -- HL
   ('english_b','HL',2025,'M','TZ1',89,74,59,41,24,11),
   ('english_b','HL',2025,'M','TZ2',89,73,57,41,24,11),
-  ('english_b','HL',2025,'M','TZ3',91,74,59,42,25,13),
   ('english_b','HL',2025,'N','TZ1',89,71,54,37,25,12),
-  ('english_b','HL',2025,'N','TZ3',90,73,57,41,27,13),
   ('english_b','HL',2024,'N','TZ0',88,72,56,40,24,11),  -- using TZ0 as proxy
   ('english_b','HL',2024,'M','TZ1',88,72,56,40,24,11),
   ('english_b','HL',2024,'M','TZ2',88,72,55,40,25,11),

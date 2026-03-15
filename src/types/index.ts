@@ -1,5 +1,5 @@
 export type Level = 'HL' | 'SL'
-export type Timezone = 'TZ0' | 'TZ1' | 'TZ2' | 'TZ3'
+export type Timezone = 'TZ0' | 'TZ1' | 'TZ2'
 export type Session = 'M' | 'N'
 
 export type SubjectKey =
