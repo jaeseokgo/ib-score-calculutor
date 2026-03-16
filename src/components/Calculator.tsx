@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { SUBJECT_MAP, AVAILABLE_YEARS } from '@/lib/subjects'
 import { fetchBoundaries, calculateGrade } from '@/lib/calculator'
+import { supabase } from '@/lib/supabase'
 import SubjectTabs from '@/components/SubjectTabs'
 import PaperInputs from '@/components/PaperInputs'
 import ResultCard from '@/components/ResultCard'
@@ -33,7 +34,7 @@ export default function Calculator() {
   const [result, setResult] = useState<CalculationResult | null>(null)
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
-  const [tz0Only, setTz0Only] = useState(false)
+  const [availableTimezones, setAvailableTimezones] = useState<Timezone[]>([])
 
   const subjectConfig = SUBJECT_MAP[subject]
   const papers = subjectConfig.papers[level]
@@ -54,25 +55,50 @@ export default function Calculator() {
     setResult(null)
   }, [subject, level])
 
-  // Session + year에 따라 유효한 timezone으로 자동 전환
+  // 과목/레벨/연도/세션에 대해 DB에서 사용 가능한 timezone 목록 조회
   useEffect(() => {
-    if (tz0Only) return
-    if (session === 'N' && year < 2025) {
-      setTimezone('TZ0')
-    } else if (session === 'N' && year === 2025) {
-      if (timezone !== 'TZ1' && timezone !== 'TZ3') setTimezone('TZ1')
-    } else if (session === 'M' && year === 2025) {
-      if (timezone === 'TZ0') setTimezone('TZ2')
-    } else {
-      if (timezone === 'TZ3') setTimezone('TZ2')
-    }
-  }, [session, year, tz0Only])
+    let cancelled = false
+    ;(async () => {
+      try {
+        const { data, error } = await supabase
+          .from('grade_boundaries')
+          .select('timezone', { distinct: true })
+          .eq('subject', subject)
+          .eq('level', level)
+          .eq('session', session)
+          .eq('year', year)
 
-  const effectiveTimezone: Timezone = session === 'N' && year < 2025 ? 'TZ0' : timezone
+        if (error || cancelled) return
+
+        const tzs = Array.from(
+          new Set(
+            (data ?? [])
+              .map((row: any) => row.timezone as Timezone)
+              .filter((tz): tz is Timezone => ['TZ0', 'TZ1', 'TZ2', 'TZ3'].includes(tz))
+          )
+        ).sort()
+
+        setAvailableTimezones(tzs)
+
+        if (tzs.length > 0 && !tzs.includes(timezone)) {
+          setTimezone(tzs[0])
+        }
+      } catch (e) {
+        console.error(e)
+      }
+    })()
+
+    return () => {
+      cancelled = true
+    }
+  }, [subject, level, year, session])
+
+  const tz0Only = availableTimezones.length === 1 && availableTimezones[0] === 'TZ0'
+
+  const effectiveTimezone: Timezone = tz0Only ? 'TZ0' : timezone
 
   useEffect(() => {
     setLoading(true)
-    setTz0Only(false)
     let cancelled = false
     fetchBoundaries(subject, level, session, effectiveTimezone)
       .then(async (data) => {
@@ -236,16 +262,11 @@ export default function Calculator() {
             </div>
           </div>
 
-          {!tz0Only && !(session === 'N' && year < 2025) && (
+          {availableTimezones.length > 1 && (
             <div className="flex flex-col gap-1.5">
               <p className="text-xs" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>Timezone</p>
               <div className="flex rounded-lg p-0.5" style={{ background: 'var(--bg-3)', border: '1px solid var(--border)' }}>
-                {(session === 'N' && year === 2025
-                  ? ['TZ1', 'TZ3']
-                  : session === 'M' && year === 2025
-                  ? ['TZ1', 'TZ2', 'TZ3']
-                  : ['TZ1', 'TZ2']
-                ).map((tz) => (
+                {availableTimezones.map((tz) => (
                   <button
                     key={tz}
                     onClick={() => setTimezone(tz as Timezone)}
