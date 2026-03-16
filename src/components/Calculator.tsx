@@ -62,7 +62,7 @@ export default function Calculator() {
       try {
         const { data, error } = await supabase
           .from('grade_boundaries')
-          .select('timezone', { distinct: true })
+          .select('timezone')
           .eq('subject', subject)
           .eq('level', level)
           .eq('session', session)
