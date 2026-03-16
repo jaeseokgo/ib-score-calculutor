@@ -103,15 +103,6 @@ export default function Calculator() {
     fetchBoundaries(subject, level, session, effectiveTimezone)
       .then(async (data) => {
         if (cancelled) return
-        if (data.length === 0 && effectiveTimezone !== 'TZ0') {
-          const fallback = await fetchBoundaries(subject, level, session, 'TZ0')
-          if (!cancelled && fallback.length > 0) {
-            setTimezone('TZ0')
-            setTz0Only(true)
-            setBoundaries(fallback)
-            return
-          }
-        }
         setBoundaries(data)
       })
       .catch(console.error)
