@@ -33,6 +33,7 @@ export default function Calculator() {
   const [result, setResult] = useState<CalculationResult | null>(null)
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
+  const [tz0Only, setTz0Only] = useState(false)
 
   const subjectConfig = SUBJECT_MAP[subject]
   const papers = subjectConfig.papers[level]
@@ -55,6 +56,7 @@ export default function Calculator() {
 
   // Session + year에 따라 유효한 timezone으로 자동 전환
   useEffect(() => {
+    if (tz0Only) return
     if (session === 'N' && year < 2025) {
       setTimezone('TZ0')
     } else if (session === 'N' && year === 2025) {
@@ -64,16 +66,33 @@ export default function Calculator() {
     } else {
       if (timezone === 'TZ3' || timezone === 'TZ0') setTimezone('TZ2')
     }
-  }, [session, year])
+  }, [session, year, tz0Only])
 
   const effectiveTimezone: Timezone = session === 'N' && year < 2025 ? 'TZ0' : timezone
 
   useEffect(() => {
     setLoading(true)
+    setTz0Only(false)
+    let cancelled = false
     fetchBoundaries(subject, level, session, effectiveTimezone)
-      .then(setBoundaries)
+      .then(async (data) => {
+        if (cancelled) return
+        if (data.length === 0 && effectiveTimezone !== 'TZ0') {
+          const fallback = await fetchBoundaries(subject, level, session, 'TZ0')
+          if (!cancelled && fallback.length > 0) {
+            setTimezone('TZ0')
+            setTz0Only(true)
+            setBoundaries(fallback)
+            return
+          }
+        }
+        setBoundaries(data)
+      })
       .catch(console.error)
       .finally(() => setLoading(false))
+    return () => {
+      cancelled = true
+    }
   }, [subject, level, session, effectiveTimezone])
 
   const handleScoreChange = useCallback((paperId: string, value: number | null) => {
@@ -217,7 +236,7 @@ export default function Calculator() {
             </div>
           </div>
 
-          {!(session === 'N' && year < 2025) && (
+          {!tz0Only && !(session === 'N' && year < 2025) && (
             <div className="flex flex-col gap-1.5">
               <p className="text-xs" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>Timezone</p>
               <div className="flex rounded-lg p-0.5" style={{ background: 'var(--bg-3)', border: '1px solid var(--border)' }}>
