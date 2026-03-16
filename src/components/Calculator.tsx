@@ -118,7 +118,7 @@ export default function Calculator() {
       <header
         className="sticky top-0 z-50 px-4 md:px-8 py-4 flex items-center justify-between"
         style={{
-          background: 'rgba(var(--bg-rgb, 245,244,240),0.9)',
+          background: 'var(--bg-header, rgba(245,244,240,0.9))',
           backdropFilter: 'blur(12px)',
           borderBottom: '1px solid var(--border)',
         }}
@@ -178,6 +178,28 @@ export default function Calculator() {
 
         <div className="flex gap-3 flex-wrap items-end animate-fade-up">
           <div className="flex flex-col gap-1.5">
+            <p className="text-xs" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>Exam year</p>
+            <select
+              value={year}
+              onChange={(e) => setYear(Number(e.target.value))}
+              className="rounded-lg px-3 py-1.5 text-xs font-semibold"
+              style={{
+                background: 'var(--bg-3)',
+                border: '1px solid var(--border)',
+                color: 'var(--text-1)',
+                fontFamily: 'var(--font-display)',
+                outline: 'none',
+                cursor: 'pointer',
+                height: '34px',
+              }}
+            >
+              {AVAILABLE_YEARS.slice().reverse().map((y) => (
+                <option key={y} value={y}>{y}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex flex-col gap-1.5">
             <p className="text-xs" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>Session</p>
             <div className="flex rounded-lg p-0.5" style={{ background: 'var(--bg-3)', border: '1px solid var(--border)' }}>
               {(['M', 'N'] as Session[]).map((s) => (
@@ -189,7 +211,7 @@ export default function Calculator() {
                     ? { background: 'var(--accent)', color: 'var(--text-on-accent)', fontFamily: 'var(--font-display)' }
                     : { color: 'var(--text-2)', fontFamily: 'var(--font-display)' }}
                 >
-                  {s === 'M' ? 'May' : 'November'}
+                  {s === 'M' ? 'May' : 'Nov'}
                 </button>
               ))}
             </div>
@@ -219,28 +241,6 @@ export default function Calculator() {
               </div>
             </div>
           )}
-
-          <div className="flex flex-col gap-1.5">
-            <p className="text-xs" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>Exam year</p>
-            <select
-              value={year}
-              onChange={(e) => setYear(Number(e.target.value))}
-              className="rounded-lg px-3 py-1.5 text-xs font-semibold"
-              style={{
-                background: 'var(--bg-3)',
-                border: '1px solid var(--border)',
-                color: 'var(--text-1)',
-                fontFamily: 'var(--font-display)',
-                outline: 'none',
-                cursor: 'pointer',
-                height: '34px',
-              }}
-            >
-              {AVAILABLE_YEARS.slice().reverse().map((y) => (
-                <option key={y} value={y}>{y}</option>
-              ))}
-            </select>
-          </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-[1fr_320px] gap-4">
