@@ -64,7 +64,7 @@ export default function Calculator() {
     } else if (session === 'M' && year === 2025) {
       if (timezone === 'TZ0') setTimezone('TZ2')
     } else {
-      if (timezone === 'TZ3' || timezone === 'TZ0') setTimezone('TZ2')
+      if (timezone === 'TZ3') setTimezone('TZ2')
     }
   }, [session, year, tz0Only])
 
