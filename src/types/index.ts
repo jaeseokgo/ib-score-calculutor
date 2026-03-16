@@ -4,14 +4,19 @@ export type Session = 'M' | 'N'
 
 export type SubjectKey =
   | 'math_aa'
+  | 'math_ai'
   | 'english_a_lang_lit'
+  | 'korean_a'
   | 'biology'
   | 'chemistry'
   | 'physics'
+  | 'computer_science'
   | 'economics'
   | 'history'
+  | 'geography'
   | 'psychology'
   | 'business_management'
+  | 'ess'
   | 'english_b'
 
 export interface Paper {

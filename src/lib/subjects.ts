@@ -21,9 +21,47 @@ export const SUBJECTS: SubjectConfig[] = [
     },
   },
   {
+    key: 'math_ai',
+    name: 'Mathematics: Applications and Interpretation',
+    shortName: 'Math AI',
+    group: 5,
+    papers: {
+      HL: [
+        { id: 'paper1', label: 'Paper 1 (Technology)', maxScore: 110, weightPercent: 30 },
+        { id: 'paper2', label: 'Paper 2 (Technology)', maxScore: 110, weightPercent: 30 },
+        { id: 'paper3', label: 'Paper 3 (Investigation)', maxScore: 55, weightPercent: 20 },
+        { id: 'ia', label: 'Internal Assessment', maxScore: 20, weightPercent: 20 },
+      ],
+      SL: [
+        { id: 'paper1', label: 'Paper 1 (Technology)', maxScore: 80, weightPercent: 40 },
+        { id: 'paper2', label: 'Paper 2 (Technology)', maxScore: 80, weightPercent: 40 },
+        { id: 'ia', label: 'Internal Assessment', maxScore: 20, weightPercent: 20 },
+      ],
+    },
+  },
+  {
     key: 'english_a_lang_lit',
     name: 'English A: Language & Literature',
     shortName: 'Eng A L&L',
+    group: 1,
+    papers: {
+      HL: [
+        { id: 'paper1', label: 'Paper 1 (Guided analysis)', maxScore: 20, weightPercent: 35 },
+        { id: 'paper2', label: 'Paper 2 (Comparative essay)', maxScore: 30, weightPercent: 25 },
+        { id: 'io', label: 'Individual Oral', maxScore: 40, weightPercent: 20 },
+        { id: 'hl_essay', label: 'HL Essay', maxScore: 20, weightPercent: 20 },
+      ],
+      SL: [
+        { id: 'paper1', label: 'Paper 1 (Guided analysis)', maxScore: 20, weightPercent: 35 },
+        { id: 'paper2', label: 'Paper 2 (Comparative essay)', maxScore: 30, weightPercent: 35 },
+        { id: 'io', label: 'Individual Oral', maxScore: 40, weightPercent: 30 },
+      ],
+    },
+  },
+  {
+    key: 'korean_a',
+    name: 'Korean A: Language & Literature',
+    shortName: 'Korean A',
     group: 1,
     papers: {
       HL: [
@@ -46,16 +84,16 @@ export const SUBJECTS: SubjectConfig[] = [
     group: 4,
     papers: {
       HL: [
-        { id: 'paper1', label: 'Paper 1 (MCQ)', maxScore: 40, weightPercent: 20 },
-        { id: 'paper2', label: 'Paper 2 (Data/essay)', maxScore: 72, weightPercent: 36 },
-        { id: 'paper3', label: 'Paper 3 (Options)', maxScore: 45, weightPercent: 24 },
-        { id: 'ia', label: 'Internal Assessment', maxScore: 24, weightPercent: 20 },
+        { id: 'paper1a', label: 'Paper 1 (MCQ)', maxScore: 40, weightPercent: 20 },
+        { id: 'paper1b', label: 'Paper 1B', maxScore: 35, weightPercent: 15 },
+        { id: 'paper2', label: 'Paper 2', maxScore: 80, weightPercent: 35 },
+        { id: 'ia', label: 'Practical Work', maxScore: 24, weightPercent: 30 },
       ],
       SL: [
-        { id: 'paper1', label: 'Paper 1 (MCQ)', maxScore: 30, weightPercent: 20 },
-        { id: 'paper2', label: 'Paper 2 (Data/essay)', maxScore: 50, weightPercent: 40 },
-        { id: 'paper3', label: 'Paper 3 (Options)', maxScore: 35, weightPercent: 20 },
-        { id: 'ia', label: 'Internal Assessment', maxScore: 24, weightPercent: 20 },
+        { id: 'paper1a', label: 'Paper 1 (MCQ)', maxScore: 30, weightPercent: 20 },
+        { id: 'paper1b', label: 'Paper 1B', maxScore: 25, weightPercent: 15 },
+        { id: 'paper2', label: 'Paper 2', maxScore: 50, weightPercent: 40 },
+        { id: 'ia', label: 'Practical Work', maxScore: 24, weightPercent: 25 },
       ],
     },
   },
@@ -66,16 +104,16 @@ export const SUBJECTS: SubjectConfig[] = [
     group: 4,
     papers: {
       HL: [
-        { id: 'paper1', label: 'Paper 1 (MCQ)', maxScore: 40, weightPercent: 20 },
-        { id: 'paper2', label: 'Paper 2 (Short/extended)', maxScore: 72, weightPercent: 36 },
-        { id: 'paper3', label: 'Paper 3 (Options)', maxScore: 45, weightPercent: 24 },
-        { id: 'ia', label: 'Internal Assessment', maxScore: 24, weightPercent: 20 },
+        { id: 'paper1a', label: 'Paper 1 (MCQ)', maxScore: 40, weightPercent: 20 },
+        { id: 'paper1b', label: 'Paper 1B', maxScore: 35, weightPercent: 15 },
+        { id: 'paper2', label: 'Paper 2', maxScore: 90, weightPercent: 35 },
+        { id: 'ia', label: 'Practical Work', maxScore: 24, weightPercent: 30 },
       ],
       SL: [
-        { id: 'paper1', label: 'Paper 1 (MCQ)', maxScore: 30, weightPercent: 20 },
-        { id: 'paper2', label: 'Paper 2 (Short/extended)', maxScore: 50, weightPercent: 40 },
-        { id: 'paper3', label: 'Paper 3 (Options)', maxScore: 35, weightPercent: 20 },
-        { id: 'ia', label: 'Internal Assessment', maxScore: 24, weightPercent: 20 },
+        { id: 'paper1a', label: 'Paper 1 (MCQ)', maxScore: 30, weightPercent: 20 },
+        { id: 'paper1b', label: 'Paper 1B', maxScore: 25, weightPercent: 15 },
+        { id: 'paper2', label: 'Paper 2', maxScore: 50, weightPercent: 40 },
+        { id: 'ia', label: 'Practical Work', maxScore: 24, weightPercent: 25 },
       ],
     },
   },
@@ -86,16 +124,35 @@ export const SUBJECTS: SubjectConfig[] = [
     group: 4,
     papers: {
       HL: [
-        { id: 'paper1', label: 'Paper 1 (MCQ)', maxScore: 40, weightPercent: 20 },
-        { id: 'paper2', label: 'Paper 2 (Short/extended)', maxScore: 72, weightPercent: 36 },
-        { id: 'paper3', label: 'Paper 3 (Options)', maxScore: 45, weightPercent: 24 },
-        { id: 'ia', label: 'Internal Assessment', maxScore: 24, weightPercent: 20 },
+        { id: 'paper1a', label: 'Paper 1 (MCQ)', maxScore: 40, weightPercent: 20 },
+        { id: 'paper1b', label: 'Paper 1B', maxScore: 20, weightPercent: 15 },
+        { id: 'paper2', label: 'Paper 2', maxScore: 90, weightPercent: 35 },
+        { id: 'ia', label: 'Practical Work', maxScore: 24, weightPercent: 30 },
       ],
       SL: [
-        { id: 'paper1', label: 'Paper 1 (MCQ)', maxScore: 30, weightPercent: 20 },
-        { id: 'paper2', label: 'Paper 2 (Short/extended)', maxScore: 50, weightPercent: 40 },
-        { id: 'paper3', label: 'Paper 3 (Options)', maxScore: 35, weightPercent: 20 },
-        { id: 'ia', label: 'Internal Assessment', maxScore: 24, weightPercent: 20 },
+        { id: 'paper1a', label: 'Paper 1 (MCQ)', maxScore: 25, weightPercent: 20 },
+        { id: 'paper1b', label: 'Paper 1B', maxScore: 20, weightPercent: 15 },
+        { id: 'paper2', label: 'Paper 2', maxScore: 50, weightPercent: 40 },
+        { id: 'ia', label: 'Practical Work', maxScore: 24, weightPercent: 25 },
+      ],
+    },
+  },
+  {
+    key: 'computer_science',
+    name: 'Computer Science',
+    shortName: 'Comp Sci',
+    group: 4,
+    papers: {
+      HL: [
+        { id: 'paper1', label: 'Paper 1 (Theory)', maxScore: 100, weightPercent: 30 },
+        { id: 'paper2', label: 'Paper 2 (Programming)', maxScore: 65, weightPercent: 20 },
+        { id: 'paper3', label: 'Paper 3 (Case study)', maxScore: 30, weightPercent: 20 },
+        { id: 'ia', label: 'Internal Assessment', maxScore: 34, weightPercent: 30 },
+      ],
+      SL: [
+        { id: 'paper1', label: 'Paper 1 (Theory)', maxScore: 70, weightPercent: 40 },
+        { id: 'paper2', label: 'Paper 2 (Programming)', maxScore: 45, weightPercent: 30 },
+        { id: 'ia', label: 'Internal Assessment', maxScore: 34, weightPercent: 30 },
       ],
     },
   },
@@ -138,6 +195,25 @@ export const SUBJECTS: SubjectConfig[] = [
     },
   },
   {
+    key: 'geography',
+    name: 'Geography',
+    shortName: 'Geography',
+    group: 3,
+    papers: {
+      HL: [
+        { id: 'paper1', label: 'Paper 1 (Geographic themes)', maxScore: 60, weightPercent: 35 },
+        { id: 'paper2', label: 'Paper 2 (Geographic perspectives)', maxScore: 50, weightPercent: 25 },
+        { id: 'paper3', label: 'Paper 3 (HL extension)', maxScore: 28, weightPercent: 20 },
+        { id: 'ia', label: 'Internal Assessment', maxScore: 25, weightPercent: 20 },
+      ],
+      SL: [
+        { id: 'paper1', label: 'Paper 1 (Geographic themes)', maxScore: 40, weightPercent: 40 },
+        { id: 'paper2', label: 'Paper 2 (Geographic perspectives)', maxScore: 50, weightPercent: 40 },
+        { id: 'ia', label: 'Internal Assessment', maxScore: 25, weightPercent: 20 },
+      ],
+    },
+  },
+  {
     key: 'psychology',
     name: 'Psychology',
     shortName: 'Psychology',
@@ -175,6 +251,24 @@ export const SUBJECTS: SubjectConfig[] = [
     },
   },
   {
+    key: 'ess',
+    name: 'Environmental Systems & Societies',
+    shortName: 'ESS',
+    group: 3,
+    papers: {
+      HL: [
+        { id: 'paper1', label: 'Paper 1 (Case study)', maxScore: 35, weightPercent: 25 },
+        { id: 'paper2', label: 'Paper 2 (Short/extended)', maxScore: 65, weightPercent: 50 },
+        { id: 'ia', label: 'Internal Assessment', maxScore: 30, weightPercent: 25 },
+      ],
+      SL: [
+        { id: 'paper1', label: 'Paper 1 (Case study)', maxScore: 35, weightPercent: 25 },
+        { id: 'paper2', label: 'Paper 2 (Short/extended)', maxScore: 65, weightPercent: 50 },
+        { id: 'ia', label: 'Internal Assessment', maxScore: 30, weightPercent: 25 },
+      ],
+    },
+  },
+  {
     key: 'english_b',
     name: 'English B',
     shortName: 'English B',
@@ -182,13 +276,14 @@ export const SUBJECTS: SubjectConfig[] = [
     papers: {
       HL: [
         { id: 'paper1', label: 'Paper 1 (Writing)', maxScore: 30, weightPercent: 25 },
-        { id: 'paper2', label: 'Paper 2 (Reading)', maxScore: 40, weightPercent: 25 },
+        { id: 'paper2_l', label: 'Paper 2 (Listening)', maxScore: 25, weightPercent: 25 },
+        { id: 'paper2_r', label: 'Paper 2 (Reading)', maxScore: 40, weightPercent: 25 },
         { id: 'io', label: 'Individual Oral', maxScore: 30, weightPercent: 25 },
-        { id: 'ia', label: 'Internal Assessment (HL Essay)', maxScore: 20, weightPercent: 25 },
       ],
       SL: [
         { id: 'paper1', label: 'Paper 1 (Writing)', maxScore: 30, weightPercent: 25 },
-        { id: 'paper2', label: 'Paper 2 (Reading)', maxScore: 40, weightPercent: 50 },
+        { id: 'paper2_l', label: 'Paper 2 (Listening)', maxScore: 25, weightPercent: 25 },
+        { id: 'paper2_r', label: 'Paper 2 (Reading)', maxScore: 40, weightPercent: 25 },
         { id: 'io', label: 'Individual Oral', maxScore: 30, weightPercent: 25 },
       ],
     },
