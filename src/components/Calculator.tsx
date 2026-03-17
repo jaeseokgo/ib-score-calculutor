@@ -35,7 +35,7 @@ export default function Calculator() {
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
   const [availableTimezones, setAvailableTimezones] = useState<Timezone[]>([])
-  const [visitorCount, setVisitorCount] = useState<number | null>(null)
+  const [pageViews, setPageViews] = useState<number | null>(null)
 
   const subjectConfig = SUBJECT_MAP[subject]
   const papers = subjectConfig.papers[level]
@@ -117,8 +117,8 @@ export default function Calculator() {
   useEffect(() => {
     fetch('/api/visitors', { method: 'POST' })
       .then((res) => res.json())
-      .then((data) => setVisitorCount(data.count ?? 0))
-      .catch(() => setVisitorCount(null))
+      .then((data) => setPageViews(data.page_views ?? 0))
+      .catch(() => setPageViews(null))
   }, [])
 
   const handleScoreChange = useCallback((paperId: string, value: number | null) => {
@@ -436,9 +436,9 @@ export default function Calculator() {
           </div>
         )}
 
-        {visitorCount !== null && (
+        {pageViews !== null && (
           <p className="text-xs text-center pt-2" style={{ color: 'var(--text-3)' }}>
-            👥 Total Visitors: {visitorCount.toLocaleString()}
+            👥 Total Page Views: {pageViews.toLocaleString()}
           </p>
         )}
 
