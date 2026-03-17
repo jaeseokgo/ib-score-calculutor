@@ -3,9 +3,21 @@ import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'IB Score Calculator',
-  description: 'Calculate your IB final grades by entering paper scores. Supports all major subjects with grade boundaries from 2019–2024.',
-  keywords: ['IB', 'International Baccalaureate', 'grade calculator', 'score calculator', 'grade boundary'],
+  title: 'IB Score Calculator 2025 | Grade Boundaries',
+  description:
+    'Calculate your IB predicted grade instantly using official 2025 grade boundaries. Supports Math AA, Biology, Chemistry, Economics, History and more.',
+  keywords: [
+    'IB score calculator',
+    'IB grade boundaries 2025',
+    'IB predicted grade',
+    'Math AA grade boundary',
+  ],
+  openGraph: {
+    title: 'IB Score Calculator 2025',
+    description: 'Calculate your IB predicted grade with official 2025 boundaries',
+    url: 'https://ibscore.app',
+    siteName: 'IB Score Calculator',
+  },
 }
 
 export default function RootLayout({
