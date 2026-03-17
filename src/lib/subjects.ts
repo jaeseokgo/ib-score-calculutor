@@ -1,6 +1,25 @@
-import type { SubjectConfig } from '@/types'
+import type { SubjectConfig, SubjectKey } from '@/types'
 
-export const SUBJECTS: SubjectConfig[] = [
+/** IBO 공식 수강생 수 순서 (많은 순) */
+const ENROLLMENT_ORDER: SubjectKey[] = [
+  'math_aa',
+  'biology',
+  'chemistry',
+  'economics',
+  'history',
+  'physics',
+  'english_a_lang_lit',
+  'psychology',
+  'korean_a',
+  'math_ai',
+  'computer_science',
+  'business_management',
+  'geography',
+  'ess',
+  'english_b',
+]
+
+const SUBJECTS_RAW: SubjectConfig[] = [
   {
     key: 'math_aa',
     name: 'Mathematics: Analysis and Approaches',
@@ -291,7 +310,11 @@ export const SUBJECTS: SubjectConfig[] = [
 ]
 
 export const SUBJECT_MAP = Object.fromEntries(
-  SUBJECTS.map((s) => [s.key, s])
+  SUBJECTS_RAW.map((s) => [s.key, s])
 ) as Record<string, SubjectConfig>
+
+export const SUBJECTS: SubjectConfig[] = ENROLLMENT_ORDER.map(
+  (key) => SUBJECT_MAP[key]
+).filter((s): s is SubjectConfig => s != null)
 
 export const AVAILABLE_YEARS = [2021, 2022, 2023, 2024, 2025]
