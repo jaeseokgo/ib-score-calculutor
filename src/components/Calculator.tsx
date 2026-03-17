@@ -35,6 +35,7 @@ export default function Calculator() {
   const [loading, setLoading] = useState(false)
   const [copied, setCopied] = useState(false)
   const [availableTimezones, setAvailableTimezones] = useState<Timezone[]>([])
+  const [visitorCount, setVisitorCount] = useState<number | null>(null)
 
   const subjectConfig = SUBJECT_MAP[subject]
   const papers = subjectConfig.papers[level]
@@ -111,6 +112,14 @@ export default function Calculator() {
       cancelled = true
     }
   }, [subject, level, session, effectiveTimezone])
+
+  // 방문자 수 증가 및 표시
+  useEffect(() => {
+    fetch('/api/visitors', { method: 'POST' })
+      .then((res) => res.json())
+      .then((data) => setVisitorCount(data.count ?? 0))
+      .catch(() => setVisitorCount(null))
+  }, [])
 
   const handleScoreChange = useCallback((paperId: string, value: number | null) => {
     setScores((prev) =>
@@ -425,6 +434,12 @@ export default function Calculator() {
               </table>
             </div>
           </div>
+        )}
+
+        {visitorCount !== null && (
+          <p className="text-xs text-center pt-2" style={{ color: 'var(--text-3)' }}>
+            👥 총 방문자 수: {visitorCount.toLocaleString()}명
+          </p>
         )}
 
         <footer className="pt-4 pb-8 text-center">
