@@ -438,7 +438,7 @@ export default function Calculator() {
 
         {visitorCount !== null && (
           <p className="text-xs text-center pt-2" style={{ color: 'var(--text-3)' }}>
-            👥 총 방문자 수: {visitorCount.toLocaleString()}명
+            👥 Total Visitors: {visitorCount.toLocaleString()}
           </p>
         )}
 
