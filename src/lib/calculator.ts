@@ -43,6 +43,22 @@ export function calculateGrade(
   }
 }
 
+function mapRowToBoundary(row: Record<string, unknown>): GradeBoundary {
+  return {
+    subject: row.subject as SubjectKey,
+    level: row.level as Level,
+    year: row.year,
+    session: row.session as Session,
+    timezone: row.timezone as Timezone,
+    grade7: row.grade7,
+    grade6: row.grade6,
+    grade5: row.grade5,
+    grade4: row.grade4,
+    grade3: row.grade3,
+    grade2: row.grade2,
+  }
+}
+
 export async function fetchBoundaries(
   subject: SubjectKey,
   level: Level,
@@ -60,19 +76,27 @@ export async function fetchBoundaries(
 
   if (error) throw error
 
-  return (data ?? []).map((row) => ({
-    subject: row.subject as SubjectKey,
-    level: row.level as Level,
-    year: row.year,
-    session: row.session as Session,
-    timezone: row.timezone as Timezone,
-    grade7: row.grade7,
-    grade6: row.grade6,
-    grade5: row.grade5,
-    grade4: row.grade4,
-    grade3: row.grade3,
-    grade2: row.grade2,
-  }))
+  let rows = (data ?? []).map(mapRowToBoundary)
+
+  // November: IBO used TZ0 only for older years; fill missing years from TZ0
+  if (session === 'N' && timezone !== 'TZ0') {
+    const { data: tz0Data } = await supabase
+      .from('grade_boundaries')
+      .select('*')
+      .eq('subject', subject)
+      .eq('level', level)
+      .eq('session', session)
+      .eq('timezone', 'TZ0')
+      .order('year', { ascending: false })
+
+    const tz0Rows = (tz0Data ?? []).map(mapRowToBoundary)
+    const byYear = new Map<number, GradeBoundary>()
+    for (const r of tz0Rows) byYear.set(r.year, r)
+    for (const r of rows) byYear.set(r.year, r)
+    rows = Array.from(byYear.values()).sort((a, b) => b.year - a.year)
+  }
+
+  return rows
 }
 
 export function getGradeColor(grade: number): string {
