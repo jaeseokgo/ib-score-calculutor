@@ -37,8 +37,7 @@ export async function POST() {
       return NextResponse.json({ page_views: 0 }, { status: 200 })
     }
 
-    const raw = data != null && Array.isArray(data) ? data[0] : data
-    const pageViews = Number(raw ?? 0)
+    const pageViews = Number(data ?? 0)
     return NextResponse.json({ page_views: pageViews })
   } catch (e) {
     console.error(e)
