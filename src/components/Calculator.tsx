@@ -429,11 +429,7 @@ export default function Calculator() {
 
         <footer className="pt-4 pb-8 text-center">
           <p className="text-xs" style={{ color: 'var(--text-3)' }}>
-            Grade boundaries sourced from{' '}
-            <a href="https://ibpredict.org" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent)', textDecoration: 'none' }}>
-              ibpredict.org
-            </a>{' '}
-            (official IBO data). Always verify with official IBO documents.
+            Grade boundaries sourced from official IBO data. Always verify with official IBO documents.
           </p>
         </footer>
       </div>
