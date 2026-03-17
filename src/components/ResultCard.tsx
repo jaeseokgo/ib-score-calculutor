@@ -26,25 +26,6 @@ export default function ResultCard({ result, year, session, timezone, maxTotal }
   const color = gradeColors[grade]
   const sessionLabel = session === 'M' ? 'May' : 'Nov'
 
-  // 원형 게이지용 진행 색상 (7/6, 5, 4, 3, 2/1)
-  const gaugeColorByGrade: Record<number, string> = {
-    7: '#00e5a0',
-    6: '#00e5a0',
-    5: '#6ee7b7',
-    4: '#fbbf24',
-    3: '#f97316',
-    2: '#ef4444',
-    1: '#ef4444',
-  }
-  const gaugeColor = gaugeColorByGrade[grade]
-  const GAUGE_SIZE = 170
-  const GAUGE_CX = GAUGE_SIZE / 2
-  const GAUGE_CY = GAUGE_SIZE / 2
-  const GAUGE_STROKE = 12
-  const GAUGE_R = GAUGE_CX - GAUGE_STROKE / 2
-  const circumference = 2 * Math.PI * GAUGE_R
-  const strokeDashoffset = circumference * (1 - percentage / 100)
-
   // Grade 7까지 필요한 raw score 계산
   const rawToGrade7 = grade < 7
     ? Math.ceil((boundary.grade7 / 100) * maxTotal) - totalRaw
@@ -73,61 +54,45 @@ export default function ResultCard({ result, year, session, timezone, maxTotal }
       className="rounded-xl p-5 flex flex-col gap-4 animate-scale-in"
       style={{ background: 'var(--bg-card)', border: `1px solid ${color}30` }}
     >
-      <p className="text-xs text-center" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>
-        {year} · {sessionLabel} · {timezone}
-      </p>
+      <div className="flex items-start justify-between">
+        <div>
+          <p className="text-xs mb-1" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>
+            {year} · {sessionLabel} · {timezone}
+          </p>
+          <div className="flex items-baseline gap-3">
+            <span
+              className="font-bold leading-none animate-pulse-glow rounded-lg px-3 py-1"
+              style={{ fontSize: '3.5rem', color, fontFamily: 'var(--font-display)', background: `${color}14` }}
+            >
+              {grade}
+            </span>
+            <div>
+              <p className="text-sm font-semibold" style={{ color, fontFamily: 'var(--font-display)' }}>
+                {getGradeLabel(grade)}
+              </p>
+              <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)' }}>
+                {totalRaw} / {maxTotal} pts ({percentage}%)
+              </p>
+            </div>
+          </div>
+        </div>
 
-      {/* 원형 게이지 카드 중앙 배치 */}
-      <div className="flex flex-col items-center gap-3">
-        <svg width={GAUGE_SIZE} height={GAUGE_SIZE} viewBox={`0 0 ${GAUGE_SIZE} ${GAUGE_SIZE}`} className="shrink-0">
+        {/* 원형 progress */}
+        <svg width="56" height="56" viewBox="0 0 56 56" className="shrink-0">
+          <circle cx="28" cy="28" r="22" fill="none" stroke="var(--bg-3)" strokeWidth="4" />
           <circle
-            cx={GAUGE_CX}
-            cy={GAUGE_CY}
-            r={GAUGE_R}
-            fill="none"
-            stroke="#1f2937"
-            strokeWidth={GAUGE_STROKE}
-          />
-          <circle
-            cx={GAUGE_CX}
-            cy={GAUGE_CY}
-            r={GAUGE_R}
-            fill="none"
-            stroke={gaugeColor}
-            strokeWidth={GAUGE_STROKE}
+            cx="28" cy="28" r="22" fill="none" stroke={color} strokeWidth="4"
             strokeLinecap="round"
-            strokeDasharray={circumference}
-            strokeDashoffset={strokeDashoffset}
-            transform={`rotate(-90 ${GAUGE_CX} ${GAUGE_CY})`}
-            style={{ transition: 'stroke-dashoffset 0.8s ease' }}
+            strokeDasharray={`${2 * Math.PI * 22}`}
+            strokeDashoffset={`${2 * Math.PI * 22 * (1 - percentage / 100)}`}
+            transform="rotate(-90 28 28)"
+            style={{ transition: 'stroke-dashoffset 0.6s ease' }}
           />
-          <text
-            x={GAUGE_CX}
-            y={GAUGE_CY - 8}
-            textAnchor="middle"
-            dominantBaseline="central"
-            style={{ fill: color, fontSize: '3.5rem', fontFamily: 'var(--font-display)', fontWeight: 800 }}
-          >
-            {grade}
-          </text>
-          <text
-            x={GAUGE_CX}
-            y={GAUGE_CY + 22}
-            textAnchor="middle"
-            dominantBaseline="central"
-            style={{ fill: 'var(--text-3)', fontSize: '0.72rem', fontFamily: 'var(--font-number)' }}
-          >
+          <text x="28" y="28" textAnchor="middle" dominantBaseline="central"
+            style={{ fill: color, fontSize: '11px', fontFamily: 'var(--font-mono)', fontWeight: 500 }}>
             {percentage}%
           </text>
         </svg>
-        <div className="text-center">
-          <p className="text-base font-semibold" style={{ color, fontFamily: 'var(--font-display)' }}>
-            {getGradeLabel(grade)}
-          </p>
-          <p className="text-xs mt-1" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-number)' }}>
-            {totalRaw} / {maxTotal} pts ({percentage}%)
-          </p>
-        </div>
       </div>
 
       {/* 다음 grade / grade 7 까지 정보 */}
@@ -169,7 +134,7 @@ export default function ResultCard({ result, year, session, timezone, maxTotal }
             style={g === grade ? { background: `${color}18`, color } : { color: 'var(--text-3)' }}
           >
             <span style={{ fontFamily: 'var(--font-display)' }}>Grade {g}</span>
-            <span style={{ fontFamily: 'var(--font-number)' }}>≥ {min === 0 ? '0' : min}%</span>
+            <span style={{ fontFamily: 'var(--font-mono)' }}>≥ {min === 0 ? '0' : min}%</span>
           </div>
         ))}
       </div>
