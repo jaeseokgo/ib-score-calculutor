@@ -47,15 +47,15 @@ function mapRowToBoundary(row: Record<string, unknown>): GradeBoundary {
   return {
     subject: row.subject as SubjectKey,
     level: row.level as Level,
-    year: row.year,
+    year: row.year as number,
     session: row.session as Session,
     timezone: row.timezone as Timezone,
-    grade7: row.grade7,
-    grade6: row.grade6,
-    grade5: row.grade5,
-    grade4: row.grade4,
-    grade3: row.grade3,
-    grade2: row.grade2,
+    grade7: row.grade7 as number,
+    grade6: row.grade6 as number,
+    grade5: row.grade5 as number,
+    grade4: row.grade4 as number,
+    grade3: row.grade3 as number,
+    grade2: row.grade2 as number,
   }
 }
 
