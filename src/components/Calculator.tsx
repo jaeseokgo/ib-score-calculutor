@@ -352,7 +352,7 @@ export default function Calculator() {
           </div>
         </div>
 
-        {result && boundaries.length > 1 && (
+        {result && boundaries.length > 0 && (
           <YearComparisonChart boundaries={boundaries} percentage={result.percentage} selectedYear={year} />
         )}
 

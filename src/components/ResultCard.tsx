@@ -37,10 +37,10 @@ export default function ResultCard({ result, year, session, timezone, maxTotal }
     1: '#ef4444',
   }
   const gaugeColor = gaugeColorByGrade[grade]
-  const GAUGE_SIZE = 140
+  const GAUGE_SIZE = 170
   const GAUGE_CX = GAUGE_SIZE / 2
   const GAUGE_CY = GAUGE_SIZE / 2
-  const GAUGE_STROKE = 10
+  const GAUGE_STROKE = 12
   const GAUGE_R = GAUGE_CX - GAUGE_STROKE / 2
   const circumference = 2 * Math.PI * GAUGE_R
   const strokeDashoffset = circumference * (1 - percentage / 100)
@@ -73,20 +73,12 @@ export default function ResultCard({ result, year, session, timezone, maxTotal }
       className="rounded-xl p-5 flex flex-col gap-4 animate-scale-in"
       style={{ background: 'var(--bg-card)', border: `1px solid ${color}30` }}
     >
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <p className="text-xs mb-1" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>
-            {year} · {sessionLabel} · {timezone}
-          </p>
-          <p className="text-sm font-semibold" style={{ color, fontFamily: 'var(--font-display)' }}>
-            {getGradeLabel(grade)}
-          </p>
-          <p className="text-xs mt-0.5" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-number)' }}>
-            {totalRaw} / {maxTotal} pts ({percentage}%)
-          </p>
-        </div>
+      <p className="text-xs text-center" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>
+        {year} · {sessionLabel} · {timezone}
+      </p>
 
-        {/* 원형 게이지 140x140 — 트랙 #1f2937, 진행색 grade별, 중앙 Grade + percentage */}
+      {/* 원형 게이지 카드 중앙 배치 */}
+      <div className="flex flex-col items-center gap-3">
         <svg width={GAUGE_SIZE} height={GAUGE_SIZE} viewBox={`0 0 ${GAUGE_SIZE} ${GAUGE_SIZE}`} className="shrink-0">
           <circle
             cx={GAUGE_CX}
@@ -111,16 +103,16 @@ export default function ResultCard({ result, year, session, timezone, maxTotal }
           />
           <text
             x={GAUGE_CX}
-            y={GAUGE_CY - 6}
+            y={GAUGE_CY - 8}
             textAnchor="middle"
             dominantBaseline="central"
-            style={{ fill: color, fontSize: '2.8rem', fontFamily: 'var(--font-display)', fontWeight: 800 }}
+            style={{ fill: color, fontSize: '3.5rem', fontFamily: 'var(--font-display)', fontWeight: 800 }}
           >
             {grade}
           </text>
           <text
             x={GAUGE_CX}
-            y={GAUGE_CY + 18}
+            y={GAUGE_CY + 22}
             textAnchor="middle"
             dominantBaseline="central"
             style={{ fill: 'var(--text-3)', fontSize: '0.72rem', fontFamily: 'var(--font-number)' }}
@@ -128,6 +120,14 @@ export default function ResultCard({ result, year, session, timezone, maxTotal }
             {percentage}%
           </text>
         </svg>
+        <div className="text-center">
+          <p className="text-base font-semibold" style={{ color, fontFamily: 'var(--font-display)' }}>
+            {getGradeLabel(grade)}
+          </p>
+          <p className="text-xs mt-1" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-number)' }}>
+            {totalRaw} / {maxTotal} pts ({percentage}%)
+          </p>
+        </div>
       </div>
 
       {/* 다음 grade / grade 7 까지 정보 */}
