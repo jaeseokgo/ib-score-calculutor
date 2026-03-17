@@ -41,7 +41,7 @@ export default function YearComparisonChart({ boundaries, percentage, selectedYe
     const d = payload[0].payload
     return (
       <div className="rounded-lg px-3 py-2 text-xs"
-        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-hover)', fontFamily: 'var(--font-mono)', color: 'var(--text-1)' }}>
+        style={{ background: 'var(--bg-card)', border: '1px solid var(--border-hover)', fontFamily: 'var(--font-number)', color: 'var(--text-1)' }}>
         <p style={{ fontFamily: 'var(--font-display)', marginBottom: 4 }}>{d.year}</p>
         <p>Grade: <span style={{ color: gradeColors[d.grade] }}>{d.grade}</span></p>
         <p>Your score: {d.pct}%</p>
@@ -58,8 +58,8 @@ export default function YearComparisonChart({ boundaries, percentage, selectedYe
       <ResponsiveContainer width="100%" height={180}>
         <BarChart data={data} barCategoryGap="30%">
           <CartesianGrid vertical={false} stroke="var(--border)" strokeDasharray="3 3" />
-          <XAxis dataKey="year" tick={{ fill: 'var(--text-3)', fontSize: 11, fontFamily: 'var(--font-mono)' }} axisLine={false} tickLine={false} />
-          <YAxis domain={[0, 7]} ticks={[1, 2, 3, 4, 5, 6, 7]} tick={{ fill: 'var(--text-3)', fontSize: 11, fontFamily: 'var(--font-mono)' }} axisLine={false} tickLine={false} width={20} />
+          <XAxis dataKey="year" tick={{ fill: 'var(--text-3)', fontSize: 11, fontFamily: 'var(--font-number)' }} axisLine={false} tickLine={false} />
+          <YAxis domain={[0, 7]} ticks={[1, 2, 3, 4, 5, 6, 7]} tick={{ fill: 'var(--text-3)', fontSize: 11, fontFamily: 'var(--font-number)' }} axisLine={false} tickLine={false} width={20} />
           <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(0,0,0,0.04)' }} />
           <ReferenceLine x={selectedYear} stroke="var(--accent)" strokeDasharray="4 4" strokeWidth={1.5} />
           <Bar dataKey="grade" radius={[4, 4, 0, 0]}>

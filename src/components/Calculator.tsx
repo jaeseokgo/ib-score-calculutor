@@ -308,7 +308,7 @@ export default function Calculator() {
 
             <div className="pt-3 flex items-center justify-between" style={{ borderTop: '1px solid var(--border)' }}>
               <span className="text-xs" style={{ color: 'var(--text-3)', fontFamily: 'var(--font-display)' }}>Total raw score</span>
-              <span className="text-sm font-medium" style={{ color: hasAnyScore ? 'var(--text-1)' : 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
+              <span className="text-sm font-medium" style={{ color: hasAnyScore ? 'var(--text-1)' : 'var(--text-3)', fontFamily: 'var(--font-number)' }}>
                 {hasAnyScore ? totalRaw : '—'}{' '}
                 <span style={{ color: 'var(--text-3)' }}>/ {maxTotal}</span>
                 {hasAnyScore && (
@@ -395,7 +395,7 @@ export default function Calculator() {
                         <td className="px-4 py-2.5 font-medium" style={{ color: isSelected ? 'var(--accent)' : 'var(--text-1)', fontFamily: 'var(--font-display)' }}>
                           {b.year}
                           {myGrade && (
-                            <span className="ml-2 px-1.5 py-0.5 rounded text-xs font-bold" style={{ background: 'var(--accent)', color: 'var(--text-on-accent)', fontFamily: 'var(--font-mono)' }}>
+                            <span className="ml-2 px-1.5 py-0.5 rounded text-xs font-bold" style={{ background: 'var(--accent)', color: 'var(--text-on-accent)', fontFamily: 'var(--font-number)' }}>
                               {myGrade}
                             </span>
                           )}
@@ -404,7 +404,7 @@ export default function Calculator() {
                           const prevVal = prev ? [prev.grade7, prev.grade6, prev.grade5, prev.grade4, prev.grade3, prev.grade2][j] : null
                           const diff = prevVal !== null ? val - prevVal : null
                           return (
-                            <td key={j} className="px-4 py-2.5" style={{ color: result && result.percentage >= val && j < 6 ? 'var(--accent)' : 'var(--text-3)', fontFamily: 'var(--font-mono)' }}>
+                            <td key={j} className="px-4 py-2.5" style={{ color: result && result.percentage >= val && j < 6 ? 'var(--accent)' : 'var(--text-3)', fontFamily: 'var(--font-number)' }}>
                               {val}%
                               {diff !== null && diff !== 0 && (
                                 <span className="ml-1 text-[10px]" style={{ color: diff > 0 ? 'var(--grade-3)' : 'var(--grade-7)', opacity: 0.8 }}>

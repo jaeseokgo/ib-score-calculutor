@@ -59,7 +59,7 @@ export default function PaperInputs({ papers, scores, onScoreChange }: Props) {
                       : 'border-[var(--border)] text-[var(--text-3)]'
                   )}
                   style={{
-                    fontFamily: 'var(--font-mono)',
+                    fontFamily: 'var(--font-number)',
                     outline: 'none',
                   }}
                 />
@@ -67,7 +67,7 @@ export default function PaperInputs({ papers, scores, onScoreChange }: Props) {
 
               <span
                 className="text-xs w-14 text-right shrink-0"
-                style={{ color: 'var(--text-3)', fontFamily: 'var(--font-mono)' }}
+                style={{ color: 'var(--text-3)', fontFamily: 'var(--font-number)' }}
               >
                 / {paper.maxScore}
               </span>
