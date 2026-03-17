@@ -8,16 +8,17 @@ export async function GET() {
   try {
     const supabase = createClient(supabaseUrl, supabaseAnonKey)
     const { data, error } = await supabase
-      .from('page_views')
-      .select('page_views')
+      .from('visitor_count')
+      .select('count')
       .eq('id', 1)
       .single()
 
     if (error) {
-      console.error('page_views GET error:', error)
+      console.error('visitor_count GET error:', error)
       return NextResponse.json({ page_views: 0 }, { status: 200 })
     }
-    return NextResponse.json({ page_views: Number(data?.page_views ?? 0) })
+    const count = Number(data?.count ?? 0)
+    return NextResponse.json({ page_views: count })
   } catch (e) {
     console.error(e)
     return NextResponse.json({ page_views: 0 }, { status: 200 })
@@ -27,28 +28,22 @@ export async function GET() {
 export async function POST() {
   try {
     const supabase = createClient(supabaseUrl, supabaseAnonKey)
-    const { data: row, error: selectError } = await supabase
-      .from('page_views')
-      .select('page_views')
+
+    const { data } = await supabase
+      .from('visitor_count')
+      .select('count')
       .eq('id', 1)
       .single()
 
-    if (selectError) {
-      console.error('page_views POST select error:', selectError)
-      return NextResponse.json({ page_views: 0 }, { status: 200 })
-    }
+    const currentCount = Number(data?.count ?? 0)
+    const nextCount = currentCount + 1
 
-    const nextPageViews = Number(row?.page_views ?? 0) + 1
-    const { error: updateError } = await supabase
-      .from('page_views')
-      .update({ page_views: nextPageViews })
+    await supabase
+      .from('visitor_count')
+      .update({ count: nextCount })
       .eq('id', 1)
 
-    if (updateError) {
-      console.error('page_views POST update error:', updateError)
-      return NextResponse.json({ page_views: Number(row?.page_views ?? 0) }, { status: 200 })
-    }
-    return NextResponse.json({ page_views: nextPageViews })
+    return NextResponse.json({ page_views: nextCount })
   } catch (e) {
     console.error(e)
     return NextResponse.json({ page_views: 0 }, { status: 200 })
