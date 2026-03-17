@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 
+export const dynamic = 'force-dynamic'
+
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
 
@@ -17,7 +19,8 @@ export async function GET() {
       console.error('visitor_count GET error:', error)
       return NextResponse.json({ page_views: 0 }, { status: 200 })
     }
-    const count = Number(data?.count ?? 0)
+    // DB 컬럼명은 count, 응답 필드명은 page_views
+    const count = Number((data as { count?: number } | null)?.count ?? 0)
     return NextResponse.json({ page_views: count })
   } catch (e) {
     console.error(e)
