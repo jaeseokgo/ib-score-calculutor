@@ -182,8 +182,8 @@ export default function Calculator() {
 
         <div className="flex items-center gap-3">
           <div
-            className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0"
-            style={{ background: '#00e5a0', color: '#000', fontFamily: 'var(--font-display)' }}
+            className="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold shrink-0 border-2"
+            style={{ borderColor: 'var(--accent)', color: 'var(--accent)', background: 'transparent', fontFamily: 'var(--font-display)' }}
             title="KO"
           >
             KO
