@@ -431,6 +431,15 @@ export default function Calculator() {
           <p className="text-xs" style={{ color: 'var(--text-3)' }}>
             Grade boundaries sourced from official IBO data. Always verify with official IBO documents.
           </p>
+          <p className="text-xs mt-2 flex items-center justify-center gap-1.5" style={{ color: 'var(--text-3)' }}>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+              <rect width="20" height="16" x="2" y="4" rx="2" />
+              <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+            </svg>
+            <a href="mailto:seokgogogo@gmail.com" style={{ color: 'var(--text-3)', textDecoration: 'none' }}>
+              seokgogogo@gmail.com
+            </a>
+          </p>
         </footer>
       </div>
     </main>
