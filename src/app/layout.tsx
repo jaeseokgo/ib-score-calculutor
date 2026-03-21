@@ -3,9 +3,9 @@ import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'IB Score Calculator 2025 | Grade Boundary Calculator',
+  title: 'IB Score Calculator 2026 | Grade Boundary Calculator',
   description:
-    'Free IB grade calculator with official 2025 grade boundaries. Calculate your IB scores for Math AA, Math AI, Biology, Chemistry, Physics, Economics, History, Psychology and more. May & November sessions.',
+    'Free IB grade calculator with official 2026 grade boundaries. Calculate your IB scores for Math AA, Math AI, Biology, Chemistry, Physics, Economics, History, Psychology and more. May & November sessions.',
   keywords: [
     'IB score calculator',
     'IB grade calculator',
