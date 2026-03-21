@@ -3,20 +3,32 @@ import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'IB Score Calculator 2025 | Grade Boundaries',
+  title: 'IB Score Calculator 2025 | Grade Boundary Calculator',
   description:
-    'Calculate your IB predicted grade instantly using official 2025 grade boundaries. Supports Math AA, Biology, Chemistry, Economics, History and more.',
+    'Free IB grade calculator with official 2025 grade boundaries. Calculate your IB scores for Math AA, Math AI, Biology, Chemistry, Physics, Economics, History, Psychology and more. May & November sessions.',
   keywords: [
     'IB score calculator',
-    'IB grade boundaries 2025',
-    'IB predicted grade',
+    'IB grade calculator',
+    'IB grade boundary 2025',
+    'International Baccalaureate calculator',
     'Math AA grade boundary',
+    'IB predicted grade',
   ],
   openGraph: {
-    title: 'IB Score Calculator 2025',
-    description: 'Calculate your IB predicted grade with official 2025 boundaries',
-    url: 'https://ibscore.app',
+    title: 'IB Score Calculator 2025 | Grade Boundary Calculator',
+    description:
+      'Calculate your IB grades instantly with official 2025 grade boundaries. Supports 15 subjects, May & November sessions.',
+    url: 'https://ib-score-calculator.vercel.app',
     siteName: 'IB Score Calculator',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'IB Score Calculator 2025',
+    description: 'Free IB grade calculator with official 2025 grade boundaries.',
+  },
+  alternates: {
+    canonical: 'https://ib-score-calculator.vercel.app',
   },
 }
 
