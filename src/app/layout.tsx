@@ -30,6 +30,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: 'https://ib-score-calculator.vercel.app',
   },
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
