@@ -3,6 +3,6 @@ import type { MetadataRoute } from 'next'
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: { userAgent: '*', allow: '/' },
-    sitemap: 'https://ib-score-calculator.vercel.app/sitemap.xml',
+    sitemap: 'https://ibscore.app/sitemap.xml',
   }
 }

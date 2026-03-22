@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import './globals.css'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ibscore.app'),
   title: 'IB Score Calculator 2026 | Grade Boundary Calculator',
   description:
     'Free IB grade calculator with official 2026 grade boundaries. Calculate your IB scores for Math AA, Math AI, Biology, Chemistry, Physics, Economics, History, Psychology and more. May & November sessions.',
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     title: 'IB Score Calculator 2026 | Grade Boundary Calculator',
     description:
       'Calculate your IB grades instantly with official 2026 grade boundaries. Supports 15 subjects, May & November sessions.',
-    url: 'https://ib-score-calculator.vercel.app',
+    url: 'https://ibscore.app',
     siteName: 'IB Score Calculator',
     type: 'website',
   },
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     description: 'Free IB grade calculator with official 2026 grade boundaries.',
   },
   alternates: {
-    canonical: 'https://ib-score-calculator.vercel.app',
+    canonical: 'https://ibscore.app',
   },
   icons: {
     icon: '/favicon.svg',
