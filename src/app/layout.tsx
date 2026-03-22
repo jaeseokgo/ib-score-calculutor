@@ -15,17 +15,17 @@ export const metadata: Metadata = {
     'IB predicted grade',
   ],
   openGraph: {
-    title: 'IB Score Calculator 2025 | Grade Boundary Calculator',
+    title: 'IB Score Calculator 2026 | Grade Boundary Calculator',
     description:
-      'Calculate your IB grades instantly with official 2025 grade boundaries. Supports 15 subjects, May & November sessions.',
+      'Calculate your IB grades instantly with official 2026 grade boundaries. Supports 15 subjects, May & November sessions.',
     url: 'https://ib-score-calculator.vercel.app',
     siteName: 'IB Score Calculator',
     type: 'website',
   },
   twitter: {
     card: 'summary',
-    title: 'IB Score Calculator 2025',
-    description: 'Free IB grade calculator with official 2025 grade boundaries.',
+    title: 'IB Score Calculator 2026',
+    description: 'Free IB grade calculator with official 2026 grade boundaries.',
   },
   alternates: {
     canonical: 'https://ib-score-calculator.vercel.app',
